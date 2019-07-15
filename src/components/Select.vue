@@ -51,8 +51,8 @@
     </div>
 
     <transition :name="transition">
-      <div class="vs__dropdown-menu__wrapper">
-        <ul ref="dropdownMenu" v-if="dropdownOpen" class="vs__dropdown-menu" role="listbox" @mousedown="onMousedown" @mouseup="onMouseUp">
+      <div v-if="dropdownOpen" class="vs__dropdown-menu__wrapper" @mousedown="onMousedown" @mouseup="onMouseUp">
+        <ul ref="dropdownMenu" class="vs__dropdown-menu" role="listbox">
           <li
             role="option"
             v-for="(option, index) in filteredOptions"
