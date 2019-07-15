@@ -51,24 +51,26 @@
     </div>
 
     <transition :name="transition">
-      <ul ref="dropdownMenu" v-if="dropdownOpen" class="vs__dropdown-menu" role="listbox" @mousedown="onMousedown" @mouseup="onMouseUp">
-        <li
-          role="option"
-          v-for="(option, index) in filteredOptions"
-          :key="index"
-          class="vs__dropdown-option"
-          :class="{ 'vs__dropdown-option--selected': isOptionSelected(option), 'vs__dropdown-option--highlight': index === typeAheadPointer }"
-          @mouseover="typeAheadPointer = index"
-          @mousedown.prevent.stop="select(option)"
-        >
-          <slot name="option" v-bind="normalizeOptionForSlot(option)">
-            {{ getOptionLabel(option) }}
-          </slot>
-        </li>
-        <li v-if="!filteredOptions.length" class="vs__no-options" @mousedown.stop="">
-          <slot name="no-options">Sorry, no matching options.</slot>
-        </li>
-      </ul>
+      <div class="vs__dropdown-menu__wrapper">
+        <ul ref="dropdownMenu" v-if="dropdownOpen" class="vs__dropdown-menu" role="listbox" @mousedown="onMousedown" @mouseup="onMouseUp">
+          <li
+            role="option"
+            v-for="(option, index) in filteredOptions"
+            :key="index"
+            class="vs__dropdown-option"
+            :class="{ 'vs__dropdown-option--selected': isOptionSelected(option), 'vs__dropdown-option--highlight': index === typeAheadPointer }"
+            @mouseover="typeAheadPointer = index"
+            @mousedown.prevent.stop="select(option)"
+          >
+            <slot name="option" v-bind="normalizeOptionForSlot(option)">
+              {{ getOptionLabel(option) }}
+            </slot>
+          </li>
+          <li v-if="!filteredOptions.length" class="vs__no-options" @mousedown.stop="">
+            <slot name="no-options">Sorry, no matching options.</slot>
+          </li>
+        </ul>
+      </div>
     </transition>
   </div>
 </template>
